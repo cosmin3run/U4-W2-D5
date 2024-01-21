@@ -9,6 +9,7 @@ import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Application {
 
@@ -50,10 +51,24 @@ public class Application {
         catalogue1.stream().filter(e -> e.getYear() == toSearchIsbn);
         catalogue1.forEach(System.out::println);
 
+        //SEARCH BY PUBBLICATION YEAR
+        System.out.println("\n"+"----------- SEARCHING AN ELEMENT USING PUBBLICATION YEAR ------------" + "\n");
 
-        //SEARCH BY ISBN
+
+        int toSearchYear = 1926;
+        List<Library> searchByYear = catalogue1.stream().filter(e->e instanceof Books && ((Books) e).getYear() == toSearchYear).toList();
+        System.out.println("Ricerca per anno: " + searchByYear);
+
+        System.out.println("\n"+"----------- SEARCHING AN ELEMENT USING THE AUTHOR ------------" + "\n");
+
+
+        //SEARCH BY AUTHOR
         String toSearchAuth = "Luigi Pirandello";
 
-        List<Library> searchByAuth = catalogue1.stream().filter(e -> e instanceof Book) && ((Books) e).getAuthor().equals(toSearchAuth);
+       List<Library> searchByAuth = catalogue1.stream().filter(e->e instanceof Books && ((Books) e).getAuthor().equals(toSearchAuth)).toList();
+        System.out.println("Ricerca per autore: " + searchByAuth);
+
+
+
     }
 }
