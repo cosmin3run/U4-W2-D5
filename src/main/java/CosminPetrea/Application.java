@@ -4,8 +4,13 @@ import CosminPetrea.en.libraries.classes.Archive;
 import CosminPetrea.en.libraries.classes.Books;
 import CosminPetrea.en.libraries.classes.GenerateItem;
 import CosminPetrea.en.libraries.superclass.Library;
+import org.apache.commons.io.FileUtils;
 
+import javax.lang.model.util.Elements;
 import java.awt.print.Book;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -71,4 +76,25 @@ public class Application {
 
 
     }
+
+    public static void saveToDisk(List<Library> list, String filePath) throws IOException{
+        StringBuilder content = new StringBuilder();
+        for(Library element : list){
+            content.append(element.toString()).append(System.lineSeparator());
+        }
+        FileUtils.writeStringToFile(new File(filePath), content.toString(), StandardCharsets.UTF_8);
+    }
+
+    private static String readFromFile(String filePath) throws IOException {
+        return FileUtils.readFileToString(new File(filePath), "UTF_8");
+    }
+
+
+
+
+
+
+
+
+
 }
